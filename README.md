@@ -21,4 +21,5 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
+* Output
+<img src="https://github.com/sudhan670/hospital/blob/main/Screenshot%202025-02-21%20120818.png" alt="ra" />
