@@ -1,0 +1,36 @@
+<h1>Patients</h1>
+
+<div class="actions mb-3">
+  <%= link_to 'Register New Patient', new_patient_path, class: 'btn btn-primary' %>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date of Birth</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Upcoming Appointments</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @patients.each do |patient| %>
+      <tr>
+        <td><%= link_to "#{patient.first_name} #{patient.last_name}", patient_path(patient) %></td>
+        <td><%= patient.date_of_birth.strftime("%b %d, %Y") %></td>
+        <td><%= patient.email %></td>
+        <td><%= patient.phone %></td>
+        <td><%= patient.appointments.upcoming.count %></td>
+        <td>
+          <%= link_to 'View', patient_path(patient), class: 'btn btn-sm btn-primary' %>
+          <%= link_to 'Edit', edit_patient_path(patient), class: 'btn btn-sm btn-secondary' %>
+          <%= link_to 'Delete', patient_path(patient), method: :delete, 
+              data: { confirm: 'Are you sure? This will delete all appointments for this patient as well.' }, 
+              class: 'btn btn-sm btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

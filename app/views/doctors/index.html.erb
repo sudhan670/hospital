@@ -1,0 +1,36 @@
+<h1>Doctors</h1>
+
+<div class="actions mb-3">
+  <%= link_to 'Add New Doctor', new_doctor_path, class: 'btn btn-primary' %>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Specialty</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Joining Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @doctors.each do |doctor| %>
+      <tr>
+        <td><%= link_to "Dr. #{doctor.first_name} #{doctor.last_name}", doctor_path(doctor) %></td>
+        <td><%= doctor.specialty.name %></td>
+        <td><%= doctor.email %></td>
+        <td><%= doctor.phone %></td>
+        <td><%= doctor.joining_date.strftime("%b %d, %Y") %></td>
+        <td>
+          <%= link_to 'View', doctor_path(doctor), class: 'btn btn-sm btn-primary' %>
+          <%= link_to 'Edit', edit_doctor_path(doctor), class: 'btn btn-sm btn-secondary' %>
+          <%= link_to 'Delete', doctor_path(doctor), method: :delete, 
+              data: { confirm: 'Are you sure? This will affect all associated appointments.' }, 
+              class: 'btn btn-sm btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

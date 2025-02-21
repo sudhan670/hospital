@@ -1,0 +1,24 @@
+<h1>Medical Specialties</h1>
+
+<div class="actions mb-3">
+  <%= link_to 'Add New Specialty', new_specialty_path, class: 'btn btn-primary' %>
+</div>
+
+<div class="row">
+  <% @specialties.each do |specialty| %>
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%= specialty.name %></h5>
+          <p class="card-text"><%= truncate(specialty.description, length: 100) if specialty.description.present? %></p>
+          <p class="card-text"><small class="text-muted">Doctors: <%= specialty.doctors.count %></small></p>
+          <%= link_to 'View Details', specialty_path(specialty), class: 'btn btn-sm btn-info' %>
+          <%= link_to 'Edit', edit_specialty_path(specialty), class: 'btn btn-sm btn-secondary' %>
+          <%= link_to 'Delete', specialty_path(specialty), method: :delete, 
+              data: { confirm: 'Are you sure? This will affect all associated doctors.' }, 
+              class: 'btn btn-sm btn-danger' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

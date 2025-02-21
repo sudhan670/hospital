@@ -1,0 +1,7 @@
+<!-- app/views/patients/edit.html.erb -->
+<h1>Edit Patient Information</h1>
+
+<%= render 'form', patient: @patient %>
+
+<%= link_to 'View Patient', @patient, class: 'btn btn-info' %> |
+<%= link_to 'Back to Patients', patients_path, class: 'btn btn-secondary' %>

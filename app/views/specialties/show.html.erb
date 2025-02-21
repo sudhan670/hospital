@@ -1,0 +1,49 @@
+<div class="card">
+  <div class="card-header">
+    <h2><%= @specialty.name %></h2>
+  </div>
+  <div class="card-body">
+    <% if @specialty.description.present? %>
+      <div class="specialty-description mb-4">
+        <h4>Description</h4>
+        <p><%= @specialty.description %></p>
+      </div>
+    <% end %>
+    
+    <h4>Doctors (<%= @specialty.doctors.count %>)</h4>
+    <% if @specialty.doctors.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Joining Date</th>
+            <th>Upcoming Appointments</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @specialty.doctors.each do |doctor| %>
+            <tr>
+              <td><%= link_to "Dr. #{doctor.first_name} #{doctor.last_name}", doctor_path(doctor) %></td>
+              <td><%= doctor.joining_date.strftime("%b %d, %Y") %></td>
+              <td><%= doctor.appointments.upcoming.count %></td>
+              <td>
+                <%= link_to 'View Schedule', doctor_appointments_path(doctor), class: 'btn btn-sm btn-info' %>
+                <%= link_to 'Book Appointment', new_doctor_appointment_path(doctor), class: 'btn btn-sm btn-success' %>
+              </td> 
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <p>There are no doctors in this specialty yet.</p>
+        <% end %>
+      </div>
+      
+      <div class="card-footer">
+        <div class="actions">
+          <%= link_to 'Back to Specialties', specialties_path, class: 'btn btn-secondary' %>
+          <%= link_to 'Edit Specialty', edit_specialty_path(@specialty), class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>

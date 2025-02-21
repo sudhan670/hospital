@@ -1,0 +1,15 @@
+<h2>Appointment Details</h2>
+
+<p><strong>Patient:</strong> <%= @appointment.patient.first_name %> <%= @appointment.patient.last_name %></p>
+<p><strong>Doctor:</strong> Dr. <%= @appointment.doctor.first_name %> <%= @appointment.doctor.last_name %></p>
+<p><strong>Appointment Date:</strong> <%= @appointment.appointment_date.strftime("%B %d, %Y %I:%M %p") %></p>
+<p><strong>Status:</strong> <span class="badge badge-<%= appointment_status_badge(@appointment.status) %>"><%= @appointment.status %></span></p>
+
+<div class="actions">
+  <%= link_to 'Edit', edit_appointment_path(@appointment), class: 'btn btn-warning' %>
+  <% if @appointment.can_be_deleted? %>
+    <%= link_to 'Cancel Appointment', @appointment, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  <% else %>
+    <span class="text-muted">Cannot Delete</span>
+  <% end %>
+</div>
